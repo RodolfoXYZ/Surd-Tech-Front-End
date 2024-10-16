@@ -1,9 +1,9 @@
 import React from 'react';
-import Home from './Pages/Home';
+import AppRoutes from './routes/AppRoutes';
 
 const App = () => {
   return (
-    <Home/>
+    <AppRoutes/>
   );
 };
 
