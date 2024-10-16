@@ -9,6 +9,8 @@ const { Content } = Layout;
 
 const Prova = () => {
 
+  console.log('Componente Prova carregado!'); 
+
   const tableData = [
     { option: 'A)', alternative: 'Lorem ipsum', progress: ['a', 'b', 'c', 'd'] },
     { option: 'B)', alternative: 'Lorem ipsum', progress: ['1', '2', '3', '4'] },
