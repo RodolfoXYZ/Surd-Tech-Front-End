@@ -5,6 +5,7 @@ import Inicio from '../Pages/Inicio/Inicio';
 import Login from '../Pages/login/Login';
 import Register from '../Pages/Register/Register';
 import Prova from '../Pages/Prova/Prova'
+import Aula from '../Pages/Aula/Aula'
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/prova" element={<Prova/>} />
+        <Route path="/aula" element={<Aula/>} />
 
       </Routes>
     </Router>

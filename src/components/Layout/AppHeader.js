@@ -15,6 +15,8 @@ const AppHeader = ({ collapsed, toggleCollapsed }) => {
         return 'Home';
       case '/Prova':
         return 'Provas';
+      case '/aula':
+        return 'Videoaulas';
       default:
         return 'Página';
     }
