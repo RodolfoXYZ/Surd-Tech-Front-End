@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Layout, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import Sidebar from '../components/Layout/Sidebar';
-import AppHeader from '../components/Layout/AppHeader';
-import CourseList from '../components/Course/CouserList';
-import { courses } from '../data/courses';
+import Sidebar from '../../components/Layout/Sidebar';
+import AppHeader from '../../components/Layout/AppHeader';
+import CourseList from '../../components/Course/CouserList';
+import { courses } from '../../data/courses';
 
 const { Content } = Layout;
 
