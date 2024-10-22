@@ -1,0 +1,94 @@
+ .container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .headerTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e79c3f;
+  }
+  
+  .headerSubtitle {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    color: #333;
+  }
+  
+  .logo {
+    width: 50px;
+    height: auto;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .productColumn {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin: 0 10px;
+    max-width: 400px;
+    text-align: center; 
+  }
+  
+  .productTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px; 
+  }
+  
+  .list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none; 
+    text-align: left; 
+  }
+  
+  .listItem {
+    margin: 20px 0; 
+    position: relative;
+    padding-left: 20px; 
+    color: #333; 
+    font-size: 1rem; 
+  }
+  
+  .listItem::before {
+    content: "•"; 
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #007bff; 
+    font-size: 1.2rem; 
+    line-height: 1; 
+  }
+  
+  .enterButton {
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+  }
+  
+  .onDemandButton {
+    background-color: #e79c3f;
+    border-color: #e79c3f;
+  }
+  
+  .educButton {
+    background-color: #476082;
+    border-color: #476082;
+  }
+  
+
+  @media (max-width: 768px) {
+    .productColumn {
+      margin: 10px; 
+    }
+  }
+  
