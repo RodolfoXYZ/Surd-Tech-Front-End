@@ -1,0 +1,75 @@
+body{
+    background-color: #F2F2F2;
+}
+
+.video-aulas-page {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+  }
+  
+  .video-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header-aula {
+    width: 778px;
+    height: 62px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 31px;
+    border-top-left-radius: 10px;
+  }
+  
+  .video-container {
+    width: 654px;
+    height: 392px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 60px;
+  }
+  
+  .aulas-list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 0px;
+  }
+  
+  .aula-item {
+    width: 278px;
+    height: 62px;
+    background-color: #fff;
+   
+    border-bottom: 0.01cm solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    cursor: pointer;
+  }
+  
+  .aula-item.selected {
+    background-color: #e0e0e0;
+  }
+
+ .aulas-first {
+    text-align: center;
+    background-color: white;
+    border-bottom: 0.01cm solid #d9d9d9;
+    border-left: 0.01cm solid #d9d9d9;
+    border-top-right-radius: 10px;
+  }
