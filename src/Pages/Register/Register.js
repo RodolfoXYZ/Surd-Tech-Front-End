@@ -24,7 +24,7 @@ const Register = () => {
         message.success('Cadastro realizado com sucesso!');
 
        
-        navigate('/home');
+        navigate('/login');
       } else {
         throw new Error('Token não encontrado na resposta');
       }

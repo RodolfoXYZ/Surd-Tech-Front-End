@@ -1,18 +1,41 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
-import { useNavigate } from 'react-router-dom'; 
+import { Form, Input, Button, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import styles from './Login.module.css';
 
 const Login = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-    navigate('/home');
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post('https://surdtech-backend.onrender.com/auth/login', {
+        email: values.email,
+        senha: values.password,
+      });
+
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        message.success('Login realizado com sucesso!');
+        navigate('/home');
+      } else {
+        throw new Error('Token não encontrado na resposta');
+      }
+    } catch (error) {
+      if (error.response) {
+        message.error(`Erro ao realizar o login: ${error.response.data.message || 'Erro desconhecido'}`);
+      } else if (error.request) {
+        message.error('Não foi possível se conectar ao servidor. Verifique sua conexão.');
+      } else {
+        message.error('Erro ao realizar o login. Tente novamente.');
+      }
+      console.error('Error:', error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log('Erro ao submeter o formulário:', errorInfo);
   };
 
   return (
@@ -30,11 +53,14 @@ const Login = () => {
           layout="vertical"
         >
           <Form.Item
-            label="Cpf/Cnpj"
-            name="cpfCnpj"
-            rules={[{ required: true, message: 'Por favor, insira seu Cpf/Cnpj!' }]}
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Por favor, insira seu email!' },
+              { type: 'email', message: 'Formato de email inválido!' },
+            ]}
           >
-            <Input />
+            <Input placeholder="Digite seu email" />
           </Form.Item>
 
           <Form.Item
@@ -42,7 +68,7 @@ const Login = () => {
             name="password"
             rules={[{ required: true, message: 'Por favor, insira sua senha!' }]}
           >
-            <Input.Password />
+            <Input.Password placeholder="Digite sua senha" />
           </Form.Item>
 
           <Form.Item>
