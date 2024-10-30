@@ -7,6 +7,7 @@ import Register from '../Pages/Register/Register';
 import Prova from '../Pages/Prova/Prova'
 import Aula from '../Pages/Aula/Aula'
 import Produto from '../Pages/Produto/Produto';
+import DashBoard from '../Pages/dashboard/DashBoard';
 
 const AppRoutes = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes = () => {
         <Route path="/prova" element={<Prova/>} />
         <Route path="/aula" element={<Aula/>} />
         <Route path="/produto" element={<Produto/>} />
+        <Route path="/dashboard" element={<DashBoard/>} />
 
 
       </Routes>
