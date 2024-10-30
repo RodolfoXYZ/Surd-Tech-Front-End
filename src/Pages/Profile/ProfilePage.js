@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, Avatar, Menu, Dropdown, Button, Card, Row, Col } from 'antd';
 import { UserOutlined, DownOutlined, HomeOutlined, BookOutlined, SearchOutlined } from '@ant-design/icons';
 import styles from './ProfilePage.module.css';
@@ -6,12 +6,34 @@ import styles from './ProfilePage.module.css';
 const { Header, Sider, Content } = Layout;
 
 const ProfilePage = () => {
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem('token'); // Obter o token
+
+    fetch("https://surdtech-backend.onrender.com/auth/profile", {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, // Adicionar o token no cabeçalho
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erro ao obter perfil');
+        }
+        return response.json();
+      })
+      .then(data => setUser(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
   const menu = (
     <Menu>
       <Menu.Item key="0">
         <div>
-          <p><strong>Rogério Ferreira</strong></p>
-          <p>E-mail: rogerio@example.com</p>
+          <p><strong>{user.nome}</strong></p>
+          <p>E-mail: {user.email}</p>
           <p>CPF: 123.456.789-00</p>
         </div>
       </Menu.Item>
@@ -61,7 +83,6 @@ const ProfilePage = () => {
           <div className={styles.content}>
             <h2>Meus certificados</h2>
             <Row gutter={[16, 16]}>
-              {/* Cada certificado ou projeto em Cards */}
               <Col span={6}>
                 <Card cover={<img alt="Desenvolvimento de Software" src="https://images.pexels.com/photos/1181672/pexels-photo-1181672.jpeg" />}>
                   Desenvolvimento de Software
@@ -87,7 +108,6 @@ const ProfilePage = () => {
                   Lorem Ipsum
                 </Card>
               </Col>
-              {/* Adicione mais certificados/projetos conforme necessário */}
             </Row>
           </div>
         </Content>
