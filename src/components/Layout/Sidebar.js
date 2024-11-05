@@ -1,11 +1,27 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
-import { SearchOutlined, BookOutlined, HomeOutlined} from '@ant-design/icons';
+import React, { useState } from 'react';
+import { Layout, Menu, Modal, Button } from 'antd';
+import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.svg';
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed, toggleCollapsed }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const showLoadingModal = () => {
+    setIsModalOpen(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Sider
       collapsible
@@ -14,7 +30,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
       trigger={null}
       style={{ background: '#004666' }}
     >
-   <div
+      <div
         className="logo"
         style={{
           padding: '20px',
@@ -29,7 +45,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           alt="Logo"
           style={{
             height: '30px',
-            marginRight: collapsed ? '0' : '2px', 
+            marginRight: collapsed ? '0' : '2px',
             transition: 'margin-right 0.3s ease',
           }}
         />
@@ -47,6 +63,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           </span>
         )}
       </div>
+      
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ background: '#004666' }}>
         <Menu.Item key="1" icon={<HomeOutlined />}>
           Home
@@ -57,7 +74,32 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
         <Menu.Item key="3" icon={<SearchOutlined />}>
           Pesquisa
         </Menu.Item>
+        
+        <Menu.Item key="4" icon={<BellOutlined />} onClick={showLoadingModal}>
+          Notificações
+        </Menu.Item>
       </Menu>
+
+      <Modal
+        title="Notificações"
+        open={isModalOpen}
+        onCancel={closeModal}
+        footer={
+          <Button type="primary" onClick={showLoadingModal} style={{ backgroundColor: '#004666', color: '#fff', border: 'none' }}>
+            Recarregar
+          </Button>
+        }
+      >
+        {loading ? (
+          <p>Carregando notificações...</p>
+        ) : (
+          <>
+            <p>Notificação 1</p>
+            <p>Notificação 2</p>
+            <p>Notificação 3</p>
+          </>
+        )}
+      </Modal>
     </Sider>
   );
 };
