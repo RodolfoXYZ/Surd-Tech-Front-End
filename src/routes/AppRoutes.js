@@ -6,7 +6,9 @@ import Login from '../Pages/login/Login';
 import Register from '../Pages/Register/Register';
 import Prova from '../Pages/Prova/Prova'
 import Aula from '../Pages/Aula/Aula'
-
+import Produto from '../Pages/Produto/Produto';
+import ProfilePage from '../Pages/Profile/ProfilePage';
+import DashBoard from '../Pages/dashboard/DashBoard'
 const AppRoutes = () => {
   return (
     <Router>
@@ -17,6 +19,9 @@ const AppRoutes = () => {
         <Route path="/register" element={<Register/>} />
         <Route path="/prova" element={<Prova/>} />
         <Route path="/aula" element={<Aula/>} />
+        <Route path="/produto" element={<Produto/>} />
+        <Route path="/profile" element={<ProfilePage/>} />
+        <Route path="/dashboard" element={<DashBoard/>} />
 
       </Routes>
     </Router>

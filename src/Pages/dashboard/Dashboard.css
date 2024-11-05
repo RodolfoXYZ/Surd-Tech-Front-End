@@ -1,0 +1,22 @@
+.logo {
+    height: 32px;
+    margin: 16px;
+    color: #fff;
+    font-size: 24px;
+    text-align: center;
+  }
+  
+  .ant-layout-sider {
+    background-color: #1e90ff;
+  }
+  
+  .ant-card {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ant-card-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

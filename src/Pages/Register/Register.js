@@ -1,19 +1,48 @@
 import React from 'react';
-import { Form, Input, Button, Row, Col } from 'antd';
-import { useNavigate } from 'react-router-dom'; 
-import styles from './Register.module.css';
+import { Form, Input, Button, Row, Col, message } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
+import styles from './Register.module.css'; 
 
 const Register = () => {
   const navigate = useNavigate(); 
 
-  const onFinish = (values) => {
-    console.log('Success:', values);
-  
-    navigate('/home');
+  const onFinish = async (values) => {
+    console.log(values)
+    try {
+      const response = await axios.post('https://surdtech-backend.onrender.com/auth/register', {
+        nome: values.name,
+        email: values.email, 
+        senha: values.password, 
+        tipoUser: "ALUNO" 
+      });
+
+      
+      if (response.data && response.data.token) {
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        message.success('Cadastro realizado com sucesso!');
+
+       
+        navigate('/login');
+      } else {
+        throw new Error('Token não encontrado na resposta');
+      }
+    } catch (error) {
+      if (error.response) {
+        
+        message.error(`Erro ao realizar o cadastro: ${error.response.data.message || 'Erro desconhecido'}`);
+      } else if (error.request) {
+        message.error('Não foi possível se conectar ao servidor. Verifique sua conexão.');
+      } else {
+        message.error('Erro ao realizar o cadastro. Tente novamente.');
+      }
+      console.error('Error:', error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
+    console.log('Erro ao submeter o formulário:', errorInfo);
   };
 
   return (
@@ -37,40 +66,19 @@ const Register = () => {
                 name="name"
                 rules={[{ required: true, message: 'Por favor, insira seu nome!' }]}
               >
-                <Input />
+                <Input placeholder="Digite seu nome" />
               </Form.Item>
             </Col>
-            <Col span={12}>
-              <Form.Item
-                label="Cpf/Cnpj"
-                name="cpfCnpj"
-                rules={[{ required: true, message: 'Por favor, insira seu Cpf/Cnpj!' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
-          
-          <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 label="Email"
                 name="email"
                 rules={[
                   { required: true, message: 'Por favor, insira seu email!' },
-                  { type: 'email', message: 'Email inválido!' },
+                  { type: 'email', message: 'Formato de email inválido!' },
                 ]}
               >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                label="Telefone"
-                name="phone"
-                rules={[{ required: true, message: 'Por favor, insira seu telefone!' }]}
-              >
-                <Input />
+                <Input placeholder="Digite seu email" />
               </Form.Item>
             </Col>
           </Row>
@@ -82,13 +90,14 @@ const Register = () => {
                 name="password"
                 rules={[{ required: true, message: 'Por favor, insira sua senha!' }]}
               >
-                <Input.Password />
+                <Input.Password placeholder="Digite sua senha" />
               </Form.Item>
             </Col>
             <Col span={12}>
               <Form.Item
                 label="Confirmar Senha"
                 name="confirmPassword"
+                dependencies={['password']}
                 rules={[
                   { required: true, message: 'Por favor, confirme sua senha!' },
                   ({ getFieldValue }) => ({
@@ -101,28 +110,7 @@ const Register = () => {
                   }),
                 ]}
               >
-                <Input.Password />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                label="Cidade"
-                name="city"
-                rules={[{ required: true, message: 'Por favor, insira sua cidade!' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                label="Estado"
-                name="state"
-                rules={[{ required: true, message: 'Por favor, insira seu estado!' }]}
-              >
-                <Input />
+                <Input.Password placeholder="Confirme sua senha" />
               </Form.Item>
             </Col>
           </Row>
