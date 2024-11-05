@@ -30,7 +30,7 @@ body{
     align-items: center;
     justify-content: center;
     margin-bottom: 31px;
-    border-radius: 10px 10px 0px 0px;
+    border-top-left-radius: 10px;
   }
   
   .video-container {
@@ -66,6 +66,10 @@ body{
     background-color: #e0e0e0;
   }
 
-  .aulas-first > h3 {
+  .aulas-first  {
     text-align: center;
+    background-color: white;
+    border-bottom: 0.01cm solid #d9d9d9;
+    border-left: 0.01cm solid #d9d9d9;
+    border-top-right-radius: 10px;
   }
