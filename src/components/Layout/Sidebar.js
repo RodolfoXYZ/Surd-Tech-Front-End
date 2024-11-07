@@ -1,13 +1,28 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
+import React, { useState } from 'react';
+import { Layout, Menu, Modal, Button } from 'antd';
+import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { BookOutlined, HomeOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.svg';
 
 const { Sider } = Layout;
 
 const Sidebar = ({ collapsed, toggleCollapsed }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const showLoadingModal = () => {
+    setIsModalOpen(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleMenuClick = (route) => {
     navigate(route);
@@ -36,7 +51,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           alt="Logo"
           style={{
             height: '30px',
-            marginRight: collapsed ? '0' : '2px', 
+            marginRight: collapsed ? '0' : '2px',
             transition: 'margin-right 0.3s ease',
           }}
         />
@@ -54,6 +69,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           </span>
         )}
       </div>
+      
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ background: '#004666' }}>
         <Menu.Item
           key="1"
@@ -78,7 +94,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           Biblioteca
         </Menu.Item>
         <Menu.Item
-          key="4"
+          key="3"
           icon={<FileOutlined />}
           onClick={() => handleMenuClick('/prova')}
           style={{
@@ -89,7 +105,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           Prova
         </Menu.Item>
         <Menu.Item
-          key="5"
+          key="4"
           icon={<DashboardOutlined />}
           onClick={() => handleMenuClick('/dashboard')}
           style={{
@@ -99,7 +115,32 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
         >
           Dashboard
         </Menu.Item>
+        
+        <Menu.Item key="5" icon={<BellOutlined />} onClick={showLoadingModal}>
+          Notificações
+        </Menu.Item>
       </Menu>
+
+      <Modal
+        title="Notificações"
+        open={isModalOpen}
+        onCancel={closeModal}
+        footer={
+          <Button type="primary" onClick={showLoadingModal} style={{ backgroundColor: '#004666', color: '#fff', border: 'none' }}>
+            Recarregar
+          </Button>
+        }
+      >
+        {loading ? (
+          <p>Carregando notificações...</p>
+        ) : (
+          <>
+            <p>Notificação 1</p>
+            <p>Notificação 2</p>
+            <p>Notificação 3</p>
+          </>
+        )}
+      </Modal>
     </Sider>
   );
 };
