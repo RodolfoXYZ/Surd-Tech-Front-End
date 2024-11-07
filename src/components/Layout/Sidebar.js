@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Modal, Button } from 'antd';
 import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Layout, Menu } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { BookOutlined, HomeOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.svg';
 
 const { Sider } = Layout;
@@ -20,6 +24,10 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  const navigate = useNavigate();
+
+  const handleMenuClick = (route) => {
+    navigate(route);
   };
 
   return (
@@ -65,14 +73,49 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
       </div>
       
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} style={{ background: '#004666' }}>
-        <Menu.Item key="1" icon={<HomeOutlined />}>
+        <Menu.Item
+          key="1"
+          icon={<HomeOutlined />}
+          onClick={() => handleMenuClick('/home')}
+          style={{
+            backgroundColor: '#004666',
+            borderBottom: '1px solid #003C4D',
+          }}
+        >
           Home
         </Menu.Item>
-        <Menu.Item key="2" icon={<BookOutlined />}>
+        <Menu.Item
+          key="2"
+          icon={<BookOutlined />}
+          onClick={() => handleMenuClick('/biblioteca')}
+          style={{
+            backgroundColor: '#004666',
+            borderBottom: '1px solid #003C4D',
+          }}
+        >
           Biblioteca
         </Menu.Item>
-        <Menu.Item key="3" icon={<SearchOutlined />}>
-          Pesquisa
+        <Menu.Item
+          key="4"
+          icon={<FileOutlined />}
+          onClick={() => handleMenuClick('/prova')}
+          style={{
+            backgroundColor: '#004666',
+            borderBottom: '1px solid #003C4D',
+          }}
+        >
+          Prova
+        </Menu.Item>
+        <Menu.Item
+          key="5"
+          icon={<DashboardOutlined />}
+          onClick={() => handleMenuClick('/dashboard')}
+          style={{
+            backgroundColor: '#004666',
+            borderBottom: '1px solid #003C4D',
+          }}
+        >
+          Dashboard
         </Menu.Item>
         
         <Menu.Item key="4" icon={<BellOutlined />} onClick={showLoadingModal}>
