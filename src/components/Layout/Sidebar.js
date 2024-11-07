@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Modal, Button } from 'antd';
-import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined } from '@ant-design/icons';
-import React from 'react';
-import { Layout, Menu } from 'antd';
+import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { BookOutlined, HomeOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
 import logo from '../../assets/images/logo.svg';
 
 const { Sider } = Layout;
@@ -12,6 +9,7 @@ const { Sider } = Layout;
 const Sidebar = ({ collapsed, toggleCollapsed }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const showLoadingModal = () => {
     setIsModalOpen(true);
@@ -24,7 +22,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  const navigate = useNavigate();
+  };
 
   const handleMenuClick = (route) => {
     navigate(route);
@@ -96,7 +94,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           Biblioteca
         </Menu.Item>
         <Menu.Item
-          key="4"
+          key="3"
           icon={<FileOutlined />}
           onClick={() => handleMenuClick('/prova')}
           style={{
@@ -107,7 +105,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           Prova
         </Menu.Item>
         <Menu.Item
-          key="5"
+          key="4"
           icon={<DashboardOutlined />}
           onClick={() => handleMenuClick('/dashboard')}
           style={{
@@ -118,7 +116,7 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
           Dashboard
         </Menu.Item>
         
-        <Menu.Item key="4" icon={<BellOutlined />} onClick={showLoadingModal}>
+        <Menu.Item key="5" icon={<BellOutlined />} onClick={showLoadingModal}>
           Notificações
         </Menu.Item>
       </Menu>
