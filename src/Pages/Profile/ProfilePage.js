@@ -14,7 +14,7 @@ const ProfilePage = () => {
     fetch("https://surdtech-backend.onrender.com/auth/profile", {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${token}`, // Adicionar o token no cabeçalho
+        'Authorization': `Bearer ${token}`, 
         'Content-Type': 'application/json',
       },
     })
