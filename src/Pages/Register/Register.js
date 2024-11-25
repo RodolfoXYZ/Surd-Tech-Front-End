@@ -2,7 +2,8 @@ import React from 'react';
 import { Form, Input, Button, Row, Col, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
-import styles from './Register.module.css'; 
+import styles from './Register.module.css';
+import logo from '../../assets/images/logo.png'; 
 
 const Register = () => {
   const navigate = useNavigate(); 
@@ -49,6 +50,7 @@ const Register = () => {
     <div className={styles.container}>
       <div className={styles.box}>
         <div className={styles.logoContainer}>
+          <img src={logo} alt="Logo SurdTech" className={styles.logo} />
           <h1 className={styles.title}>SurdTech</h1>
         </div>
         <h3 className={styles.subtitle}>Cadastro</h3>

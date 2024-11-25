@@ -3,6 +3,7 @@ import { Form, Input, Button, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './Login.module.css';
+import logo from '../../assets/images/logo.png';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -42,6 +43,7 @@ const Login = () => {
     <div className={styles.container}>
       <div className={styles.box}>
         <div className={styles.logoContainer}>
+          <img src={logo} alt="Logo SurdTech" className={styles.logo} />
           <h1 className={styles.title}>SurdTech</h1>
         </div>
         <h3 className={styles.subtitle}>Login</h3>
