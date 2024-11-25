@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Layout } from 'antd';
 import { useNavigate } from 'react-router-dom'; 
+import logo from '../../assets/images/logo.png'; 
 
 const { Content } = Layout;
 
@@ -18,14 +19,17 @@ const Inicio = () => {
           textAlign: 'center',
         }}
       >
-        
-        <div style={{ marginBottom: '160px' }}>
-          <h1 style={{ fontSize: '48px', fontWeight: 'bold', color: '#d4a15a' }}>
+        <div style={{ marginBottom: '160px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+          <img 
+            src={logo} 
+            alt="Logo SurdTech" 
+            style={{ width: '40px', height: 'auto' }} 
+          />
+          <h1 style={{ fontSize: '48px', fontWeight: 'bold', color: '#d4a15a', margin: 0 }}>
             SurdTech
           </h1>
         </div>
 
-     
         <div>
           <Button
             type="primary"
