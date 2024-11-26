@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Form, Input, Button, Upload, message } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Layout, Form, Input, Button, message } from 'antd';
 import Sidebar from '../../components/Layout/Sidebar';
 import AppHeader from '../../components/Layout/AppHeader';
 import axios from 'axios';
@@ -21,15 +20,17 @@ const UploadVideo = () => {
     const token = localStorage.getItem('authToken');
 
     try {
-      const formData = new FormData();
-      formData.append('titulo', values.titulo);
-      formData.append('descricao', values.descricao);
-      formData.append('arquivo', values.arquivo.file);
+      // Envia apenas o link do vídeo
+      const data = {
+        titulo: values.titulo,
+        descricao: values.descricao,
+        link: values.link,  // O link do vídeo
+      };
 
-      await axios.post('https://surdtech-backend.onrender.com/video/upload', formData, {
+      await axios.post('https://surdtech-backend.onrender.com/video/upload', data, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
         },
       });
 
@@ -76,14 +77,11 @@ const UploadVideo = () => {
               </Form.Item>
 
               <Form.Item
-                name="arquivo"
-                label="Arquivo do Vídeo"
-                valuePropName="file"
-                rules={[{ required: true, message: 'Por favor, envie o arquivo do vídeo' }]}
+                name="link"
+                label="Link do Vídeo"
+                rules={[{ required: true, message: 'Por favor, insira o link do vídeo' }]}
               >
-                <Upload beforeUpload={() => false} maxCount={1}>
-                  <Button icon={<UploadOutlined />}>Escolher arquivo</Button>
-                </Upload>
+                <Input placeholder="Digite o link do vídeo" />
               </Form.Item>
 
               <Form.Item>

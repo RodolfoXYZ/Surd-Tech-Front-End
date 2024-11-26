@@ -7,7 +7,7 @@ import {
   BellOutlined, 
   FileOutlined, 
   DashboardOutlined, 
-  UploadOutlined // Ícone adicionado
+  UploadOutlined
 } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.svg';
