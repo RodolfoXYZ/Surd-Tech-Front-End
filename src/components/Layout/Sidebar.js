@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { Layout, Menu, Modal, Button } from 'antd';
-import { SearchOutlined, BookOutlined, HomeOutlined, BellOutlined, FileOutlined, DashboardOutlined } from '@ant-design/icons';
+import { 
+  SearchOutlined, 
+  BookOutlined, 
+  HomeOutlined, 
+  BellOutlined, 
+  FileOutlined, 
+  DashboardOutlined, 
+  UploadOutlined // Ícone adicionado
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.svg';
 
@@ -115,9 +123,19 @@ const Sidebar = ({ collapsed, toggleCollapsed }) => {
         >
           Dashboard
         </Menu.Item>
-        
-        <Menu.Item key="5" icon={<BellOutlined />} onClick={showLoadingModal}>
+        <Menu.Item
+          key="5"
+          icon={<BellOutlined />}
+          onClick={showLoadingModal}
+        >
           Notificações
+        </Menu.Item>
+        <Menu.Item
+          key="6"
+          icon={<UploadOutlined />} 
+          onClick={() => handleMenuClick('/upload-video')} 
+        >
+          Upload de Vídeo
         </Menu.Item>
       </Menu>
 

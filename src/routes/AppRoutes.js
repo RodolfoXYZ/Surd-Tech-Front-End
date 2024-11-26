@@ -9,6 +9,8 @@ import Aula from '../Pages/Aula/Aula'
 import Produto from '../Pages/Produto/Produto';
 import ProfilePage from '../Pages/Profile/ProfilePage';
 import DashBoard from '../Pages/dashboard/DashBoard'
+import UploadVideo from '../Pages/uploadVideo/uploadVideo';
+import Biblioteca from '../Pages/Biblioteca/Biblioteca';
 const AppRoutes = () => {
   return (
     <Router>
@@ -22,6 +24,9 @@ const AppRoutes = () => {
         <Route path="/produto" element={<Produto/>} />
         <Route path="/profile" element={<ProfilePage/>} />
         <Route path="/dashboard" element={<DashBoard/>} />
+        <Route path="/upload-video" element={<UploadVideo/>}/>
+        <Route path="/biblioteca" element={<Biblioteca/>}/>
+        
 
       </Routes>
     </Router>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Input, Card, Spin, Alert, Empty } from 'antd';
+import { Layout, Input, Card, Spin, Alert, Empty, Modal } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import Sidebar from '../../components/Layout/Sidebar';
 import AppHeader from '../../components/Layout/AppHeader';
@@ -9,23 +9,25 @@ const { Content } = Layout;
 
 const Home = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const [videos, setVideos] = useState([]); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(false); 
-  const [search, setSearch] = useState(''); 
+  const [videos, setVideos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [search, setSearch] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentVideo, setCurrentVideo] = useState(null);
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
 
   const fetchVideos = async () => {
-    setLoading(true); 
-    setError(false); 
+    setLoading(true);
+    setError(false);
     try {
-      const token = localStorage.getItem("authToken"); 
+      const token = localStorage.getItem("authToken");
       const response = await axios.get('https://surdtech-backend.onrender.com/video', {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
       setVideos(response.data);
@@ -44,6 +46,16 @@ const Home = () => {
   const filteredVideos = videos.filter((video) =>
     video.titulo.toLowerCase().includes(search.toLowerCase())
   );
+
+  const openModal = (video) => {
+    setCurrentVideo(video);
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setCurrentVideo(null);
+  };
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -78,28 +90,17 @@ const Home = () => {
                   title={video.titulo}
                   bordered={false}
                   style={{ width: 300 }}
+                  onClick={() => openModal(video)}
                 >
-                  {/* Player do vídeo */}
-                  <iframe
-                    width="100%"
-                    height="200"
-                    src={video.url.replace('watch?v=', 'embed/')}
-                    title={video.titulo}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-
-                  {/* Descrição do vídeo */}
                   <div style={{ marginTop: '12px' }}>
                     <p style={{
                       fontSize: '14px',
                       color: '#555',
                       lineHeight: '1.5',
                       wordBreak: 'break-word',
-                      maxHeight: '60px', 
-                      overflow: 'hidden', 
-                      textOverflow: 'ellipsis', 
+                      maxHeight: '60px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
                       display: '-webkit-box',
                       WebkitLineClamp: 3,
                       WebkitBoxOrient: 'vertical'
@@ -113,6 +114,26 @@ const Home = () => {
           )}
         </Content>
       </Layout>
+
+      {currentVideo && (
+        <Modal
+          title={currentVideo.titulo}
+          visible={modalVisible}
+          onCancel={closeModal}
+          footer={null}
+          width="80%"
+        >
+          <iframe
+            width="100%"
+            height="400"
+            src={currentVideo.url.replace('watch?v=', 'embed/')}
+            title={currentVideo.titulo}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </Modal>
+      )}
     </Layout>
   );
 };
